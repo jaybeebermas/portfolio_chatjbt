@@ -324,8 +324,8 @@
 }
 
 .avatar-ring {
-  width: 100px;
-  height: 100px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
   border: 2px solid var(--border-primary);
   display: flex;
@@ -342,8 +342,8 @@
 }
 
 .avatar-placeholder {
-  width: 84px;
-  height: 84px;
+  width: 114px;
+  height: 114px;
   border-radius: 50%;
   background: var(--bg-secondary);
   display: flex;

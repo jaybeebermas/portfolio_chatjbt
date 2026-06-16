@@ -55,12 +55,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   // Core metrics for the Tech Stack panel
   coreSkills = [
-    { name: 'Laravel (Backend)', percentage: 90, level: 'Advanced' },
-    { name: 'Angular (Frontend)', percentage: 80, level: 'Advanced' },
-    { name: 'JavaScript (Frontend)', percentage: 85, level: 'Advanced' },
-    { name: 'Databases (MySQL & Postgres)', percentage: 75, level: 'Intermediate' },
-    { name: 'C++ (Problem Solving)', percentage: 70, level: 'Intermediate' },
-    { name: 'Git & VCS Workflow', percentage: 85, level: 'Advanced' }
+    { name: 'Laravel (Backend)', percentage: 90, level: 'Advanced', image: '/Laravel.svg' },
+    { name: 'Angular (Frontend)', percentage: 80, level: 'Advanced', image: '/angular_icon_gradient.gif' },
+    { name: 'JavaScript (Frontend)', percentage: 85, level: 'Advanced', image: '/js.png' },
+    { name: 'Databases (MySQL & Postgres)', percentage: 75, level: 'Intermediate', image: '/mysql.png' },
+    { name: 'C++ (Problem Solving)', percentage: 70, level: 'Intermediate', image: '/c-.png' },
+    { name: 'Git & VCS Workflow', percentage: 85, level: 'Advanced', image: '/git.png' }
   ];
 
   // Skills overview fallback (retains names for general lists)

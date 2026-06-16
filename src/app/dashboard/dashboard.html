@@ -22,8 +22,8 @@
 
           <div class="card-avatar">
             <div class="avatar-ring">
-              <div class="avatar-placeholder">
-                <i data-lucide="user" style="width:52px;height:52px"></i>
+              <div class="avatar-placeholder" style="overflow: hidden; padding: 0;">
+                <img src="/heroicon.jpg" alt="Niño Jaybee R. Bermas" class="profile-avatar-img">
               </div>
             </div>
           </div>
@@ -106,7 +106,11 @@
             @for (skill of coreSkills; track skill.name) {
             <div class="metric-item">
               <div class="skill-logo-placeholder">
-                <i data-lucide="code-2" style="width:14px;height:14px"></i>
+                @if (skill.image) {
+                  <img [src]="skill.image" [alt]="skill.name" class="tech-logo-img">
+                } @else {
+                  <i data-lucide="code-2" style="width:14px;height:14px"></i>
+                }
               </div>
               <div class="metric-info">
                 <span class="metric-name">{{ skill.name }}</span>
