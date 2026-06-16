@@ -1,0 +1,388 @@
+<section class="dashboard">
+  <div class="dashboard-container">
+
+
+    <!-- Independent Double-Column Grid to Prevent Vertical Blank Space -->
+    <div class="dashboard-grid">
+
+      <!-- COLUMN 1: Identity, Skills, Heatmap -->
+      <div class="dashboard-col">
+
+        <!-- Holographic Access Card -->
+        <div class="access-card" #accessCard>
+          <div class="card-glow"></div>
+          <div class="card-grid-pattern"></div>
+          <div class="card-header">
+            <div class="card-badge">DEVELOPER</div>
+            <div class="card-status">
+              <span class="status-dot"></span>
+              <span>Active</span>
+            </div>
+          </div>
+
+          <div class="card-avatar">
+            <div class="avatar-ring">
+              <div class="avatar-placeholder">
+                <i data-lucide="user" style="width:52px;height:52px"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-identity">
+            <h2 class="card-name">Niño Jaybee R. Bermas</h2>
+            <p class="card-role">Full Stack Developer</p>
+            <p class="card-degree">Bachelor of Science in Information Systems</p>
+          </div>
+
+          <div class="card-meta">
+            <div class="meta-item">
+              <i data-lucide="map-pin" style="width:14px;height:14px"></i>
+              <span>Philippines</span>
+            </div>
+            <div class="meta-item">
+              <i data-lucide="code-2" style="width:14px;height:14px"></i>
+              <span>chatjbt</span>
+            </div>
+          </div>
+
+          <div class="card-divider"></div>
+
+          <!-- Social Links on Access Card -->
+          <div class="card-socials">
+            <a href="https://github.com" target="_blank" class="social-icon-btn" title="GitHub">
+              <i data-lucide="github" style="width:15px;height:15px"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="social-icon-btn" title="LinkedIn">
+              <i data-lucide="linkedin" style="width:15px;height:15px"></i>
+            </a>
+            <a href="mailto:contact@example.com" class="social-icon-btn" title="Email">
+              <i data-lucide="mail" style="width:15px;height:15px"></i>
+            </a>
+          </div>
+
+          <div class="card-footer">
+            <span class="card-id">#CHATJBT</span>
+            <span class="card-year">2026</span>
+          </div>
+        </div>
+
+        <!-- About Panel -->
+        <div class="panel panel-about">
+          <div class="panel-header">
+            <div class="panel-icon">
+              <i data-lucide="user" style="width:18px;height:18px"></i>
+            </div>
+            <h3 class="panel-title">About Me</h3>
+            <a routerLink="/about" class="panel-header-link">Bio Details</a>
+          </div>
+          <div class="about-quote">
+            <span class="quote-symbol">“</span>
+            <p class="quote-text">
+              I build robust backend pipelines and modular frontend systems, bridging the gap between design drafts and
+              production code.
+            </p>
+          </div>
+          <p class="panel-text">
+            My engineering stack focuses on <strong>Laravel</strong> and <strong>Angular</strong>, building responsive,
+            secure applications supported by transactional database schemas.
+          </p>
+          <a routerLink="/about" class="panel-link">
+            Read More
+            <i data-lucide="arrow-right" style="width:16px;height:16px"></i>
+          </a>
+        </div>
+
+        <!-- Tech Stack Progress Panel -->
+        <div class="panel panel-tech-expanded">
+          <div class="panel-header">
+            <div class="panel-icon">
+              <i data-lucide="layers" style="width:18px;height:18px"></i>
+            </div>
+            <h3 class="panel-title">Core Competencies</h3>
+            <a routerLink="/skills" class="panel-header-link">View All</a>
+          </div>
+
+          <div class="metrics-list">
+            @for (skill of coreSkills; track skill.name) {
+            <div class="metric-item">
+              <div class="skill-logo-placeholder">
+                <i data-lucide="code-2" style="width:14px;height:14px"></i>
+              </div>
+              <div class="metric-info">
+                <span class="metric-name">{{ skill.name }}</span>
+                <span class="metric-badge">{{ skill.level }}</span>
+              </div>
+            </div>
+            }
+          </div>
+        </div>
+
+      </div>
+
+      <!-- COLUMN 2: About, Terminal, Projects, Experience, Contact -->
+      <div class="dashboard-col">
+
+        <!-- Interactive Terminal Widget -->
+        <div class="panel panel-terminal">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span class="dot-red"></span>
+              <span class="dot-yellow"></span>
+              <span class="dot-green"></span>
+            </div>
+            <div class="terminal-tabs">
+              <button class="terminal-tab" [class.tab-active]="activeTerminalTab === 'terminal'"
+                (click)="switchTerminalTab('terminal')">
+                <i data-lucide="terminal" style="width:12px;height:12px"></i>
+                <span>terminal.sh</span>
+              </button>
+              <button class="terminal-tab" [class.tab-active]="activeTerminalTab === 'skills'"
+                (click)="switchTerminalTab('skills')">
+                <i data-lucide="file-json" style="width:12px;height:12px"></i>
+                <span>skills.json</span>
+              </button>
+              <button class="terminal-tab" [class.tab-active]="activeTerminalTab === 'bio'"
+                (click)="switchTerminalTab('bio')">
+                <i data-lucide="file-text" style="width:12px;height:12px"></i>
+                <span>bio.md</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- TAB CONTENT: Mock Terminal Console -->
+          @if (activeTerminalTab === 'terminal') {
+          <div class="terminal-body">
+            <div class="terminal-body-scroll">
+              @for (line of terminalLines; track $index) {
+              <div class="terminal-line">{{ line }}</div>
+              }
+              <div class="terminal-prompt-line">
+                <span class="prompt-text">guest@chatjbt:~$</span>
+                <input #cmdInput type="text" class="terminal-input-field" placeholder="type 'help'..."
+                  (keyup.enter)="onTerminalInput(cmdInput)" autofocus />
+              </div>
+            </div>
+
+            <!-- Quick Commands Bar -->
+            <div class="terminal-actions">
+              <span class="action-label">Quick Execute:</span>
+              <div class="action-buttons">
+                <button (click)="executeTerminalCommand('help')" class="cmd-btn">help</button>
+                <button (click)="executeTerminalCommand('about')" class="cmd-btn">about</button>
+                <button (click)="executeTerminalCommand('skills')" class="cmd-btn">skills</button>
+                <button (click)="executeTerminalCommand('projects')" class="cmd-btn">projects</button>
+                <button (click)="executeTerminalCommand('clear')" class="cmd-btn">clear</button>
+              </div>
+            </div>
+          </div>
+          }
+
+          <!-- TAB CONTENT: JSON Skills view -->
+          @if (activeTerminalTab === 'skills') {
+          <div class="terminal-body code-view">
+            <pre><code><span class="code-bracket">&#123;</span>
+  <span class="code-key">"frontend"</span>: <span class="code-bracket">[</span>
+    <span class="code-val">"HTML5 / CSS3 / ES6+"</span>,
+    <span class="code-val">"Angular 21 (Standalone, Signals)"</span>,
+    <span class="code-val">"Responsive Design & Styling"</span>
+  <span class="code-bracket">]</span>,
+  <span class="code-key">"backend"</span>: <span class="code-bracket">[</span>
+    <span class="code-val">"PHP Laravel Framework"</span>,
+    <span class="code-val">"C++ Algorithm Architecture"</span>
+  <span class="code-bracket">]</span>,
+  <span class="code-key">"databases"</span>: <span class="code-bracket">[</span>
+    <span class="code-val">"MySQL Query Opt"</span>,
+    <span class="code-val">"PostgreSQL Schemas"</span>
+  <span class="code-bracket">]</span>,
+  <span class="code-key">"vcs_and_tools"</span>: <span class="code-bracket">[</span>
+    <span class="code-val">"Git Workflow"</span>, <span class="code-val">"GitHub Actions"</span>, <span class="code-val">"Bitbucket"</span>
+  <span class="code-bracket">]</span>
+<span class="code-bracket">&#125;</span></code></pre>
+          </div>
+          }
+
+          <!-- TAB CONTENT: Markdown Bio -->
+          @if (activeTerminalTab === 'bio') {
+          <div class="terminal-body code-view text-content">
+            <h4># Niño Jaybee R. Bermas</h4>
+            <p>Full Stack Engineer based in the Philippines.</p>
+            <br />
+            <p><strong>## Objective</strong></p>
+            <p>To implement clean, highly performant systems using architectural patterns that scale easily. I minimize
+              dependencies and optimize asset delivery.</p>
+            <br />
+            <p><strong>## Focus Areas</strong></p>
+            <p>- Full-featured RESTful APIs with secure validation</p>
+            <p>- Angular reactive component trees</p>
+            <p>- Optimized query execution plans</p>
+          </div>
+          }
+        </div>
+
+        <!-- Featured Projects Panel (Longer, with all 4 projects) -->
+        <div class="panel panel-projects-expanded">
+          <div class="panel-header">
+            <div class="panel-icon">
+              <i data-lucide="folder-open" style="width:18px;height:18px"></i>
+            </div>
+            <h3 class="panel-title">Featured Projects</h3>
+            <a routerLink="/projects" class="panel-header-link">Explore Projects</a>
+          </div>
+
+          <div class="project-extended-list">
+            @for (project of featuredProjects; track project.name) {
+            <a [routerLink]="project.link" class="project-card-link">
+              <div class="project-card-row">
+                <div class="project-left">
+                  <div class="project-badge-dot"></div>
+                  <div class="project-names">
+                    <span class="project-main-name">{{ project.name }}</span>
+                    <span class="project-sub-name">{{ project.category }}</span>
+                  </div>
+                </div>
+                <p class="project-row-desc">{{ project.desc }}</p>
+                <div class="project-tags">
+                  @for (tag of project.tags; track tag) {
+                  <span class="project-tag-pill">{{ tag }}</span>
+                  }
+                </div>
+                <div class="project-arrow-icon">
+                  <i data-lucide="chevron-right" style="width:16px;height:16px"></i>
+                </div>
+              </div>
+            </a>
+            }
+          </div>
+        </div>
+
+        <!-- Experience Panel (Vertical Timeline) -->
+        <div class="panel panel-experience-timeline">
+          <div class="panel-header">
+            <div class="panel-icon">
+              <i data-lucide="briefcase" style="width:18px;height:18px"></i>
+            </div>
+            <h3 class="panel-title">Experience Highlights</h3>
+            <a routerLink="/experience" class="panel-header-link">Full Timeline</a>
+          </div>
+
+          <div class="timeline-vertical">
+            <div class="timeline-track"></div>
+
+            <div class="timeline-point">
+              <div class="point-marker">
+                <i data-lucide="layers" style="width:12px;height:12px"></i>
+              </div>
+              <div class="point-content">
+                <div class="point-header">
+                  <span class="point-title">Full Stack with Angular</span>
+                  <span class="point-time">Current</span>
+                </div>
+                <p class="point-desc">Deploying client and admin dashboard modules connected via modular APIs.</p>
+              </div>
+            </div>
+
+            <div class="timeline-point">
+              <div class="point-marker">
+                <i data-lucide="database" style="width:12px;height:12px"></i>
+              </div>
+              <div class="point-content">
+                <div class="point-header">
+                  <span class="point-title">Backend &amp; Databases</span>
+                  <span class="point-time">Mastery Phase</span>
+                </div>
+                <p class="point-desc">Engineered transactional safety logs and relational architectures using MySQL and
+                  PostgreSQL.</p>
+              </div>
+            </div>
+
+            <div class="timeline-point">
+              <div class="point-marker">
+                <i data-lucide="monitor" style="width:12px;height:12px"></i>
+              </div>
+              <div class="point-content">
+                <div class="point-header">
+                  <span class="point-title">Frontend Development</span>
+                  <span class="point-time">Core Phase</span>
+                </div>
+                <p class="point-desc">Crafted interactive components and optimized client-side styles for responsiveness.</p>
+              </div>
+            </div>
+
+            <div class="timeline-point">
+              <div class="point-marker">
+                <i data-lucide="globe" style="width:12px;height:12px"></i>
+              </div>
+              <div class="point-content">
+                <div class="point-header">
+                  <span class="point-title">System Deployments</span>
+                  <span class="point-time">Junior Phase</span>
+                </div>
+                <p class="point-desc">Configured server runtimes and automated script-based deployment integrations.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Get In Touch Card (Full Width Terminal Card) -->
+    <div class="panel panel-terminal panel-contact-refined">
+      <div class="terminal-header">
+        <div class="terminal-dots">
+          <span class="dot-red"></span>
+          <span class="dot-yellow"></span>
+          <span class="dot-green"></span>
+        </div>
+        <span class="terminal-form-title">connect_session.sh</span>
+      </div>
+
+      <div class="terminal-body">
+        @if (!dashboardContactSubmitted) {
+          <form (submit)="onDashboardContactSubmit(dashSubject.value, dashMessage.value, $event); dashSubject.value=''; dashMessage.value=''" class="terminal-form-inner">
+            <div class="terminal-form-line">
+              <span class="prompt-text">guest@chatjbt:~$</span> <span class="cmd-text">contact --init</span>
+            </div>
+            <div class="terminal-form-line">
+              <span class="prompt-text">guest@chatjbt:~$</span> <span class="cmd-text">set --subject "</span>
+            </div>
+            <div class="terminal-form-line secondary-prompt-line">
+              <span class="prompt-text secondary-prompt">></span>
+              <input #dashSubject type="text" class="terminal-form-input full-width-input" placeholder="subject goes here..." required />
+            </div>
+            <div class="terminal-form-line">
+              <span class="cmd-text">"</span>
+            </div>
+            <div class="terminal-form-line">
+              <span class="prompt-text">guest@chatjbt:~$</span> <span class="cmd-text">set --message "</span>
+            </div>
+            <div class="terminal-form-line secondary-prompt-line">
+              <span class="prompt-text secondary-prompt">></span>
+              <textarea #dashMessage class="terminal-form-textarea full-width-textarea" placeholder="type message here..." required></textarea>
+            </div>
+            <div class="terminal-form-line">
+              <span class="cmd-text">"</span>
+            </div>
+            <button type="submit" class="terminal-form-submit-btn">
+              <span class="prompt-text">guest@chatjbt:~$</span> <span class="cmd-text">sh send_message.sh</span>
+            </button>
+          </form>
+        } @else {
+          <div class="terminal-form-inner success-view">
+            <div class="terminal-form-line">
+              <span class="prompt-text">guest@chatjbt:~$</span> <span class="cmd-text">sh send_message.sh</span>
+            </div>
+            <div class="terminal-success-trace">
+              <span class="trace-line">Connecting to gateway... [OK]</span>
+              <span class="trace-line text-emerald">Dispatched: Message successfully sent to Niño!</span>
+            </div>
+            <button (click)="dashboardContactSubmitted = false" class="terminal-reset-btn">
+              <span class="prompt-text">guest@chatjbt:~$</span> <span class="cmd-text">clear --new-message</span>
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

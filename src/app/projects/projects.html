@@ -1,0 +1,47 @@
+<section class="projects-page">
+  <div class="page-container">
+
+    <div class="page-header">
+      <a routerLink="/" class="back-link">
+        <i data-lucide="arrow-left" style="width:16px;height:16px"></i>
+        Back
+      </a>
+      <div>
+        <h1 class="page-title">My Projects</h1>
+      </div>
+    </div>
+
+    <div class="projects-grid">
+      @for (project of projects; track project.name) {
+        <article class="project-card">
+          <div class="project-visual">
+            <div class="project-glow"></div>
+            <div class="project-icon-wrapper">
+              <i [attr.data-lucide]="project.icon" style="width:28px;height:28px"></i>
+            </div>
+          </div>
+          <div class="project-content">
+            <span class="project-category">{{ project.category }}</span>
+            <h3 class="project-name">{{ project.name }}</h3>
+            <p class="project-description">{{ project.description }}</p>
+            <div class="project-tags">
+              @for (tag of project.tags; track tag) {
+                <span class="project-tag">{{ tag }}</span>
+              }
+            </div>
+            
+            <div class="project-card-divider"></div>
+            
+            <div class="project-card-footer">
+              <span class="view-project-text">View System Details</span>
+              <div class="view-project-arrow">
+                <i data-lucide="chevron-right" style="width:14px;height:14px;color:#ffffff"></i>
+              </div>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+
+  </div>
+</section>

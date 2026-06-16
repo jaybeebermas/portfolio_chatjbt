@@ -1,0 +1,38 @@
+<section class="experience-page">
+  <div class="page-container">
+
+    <div class="page-header">
+      <a routerLink="/" class="back-link">
+        <i data-lucide="arrow-left" style="width:16px;height:16px"></i>
+        Back
+      </a>
+      <div>
+        <h1 class="page-title">Experience</h1>
+      </div>
+    </div>
+
+    <div class="timeline">
+      @for (milestone of milestones; track milestone.title; let i = $index; let last = $last) {
+        <div class="timeline-item">
+          <div class="timeline-marker">
+            <div class="marker-icon">
+              <i [attr.data-lucide]="milestone.icon" style="width:18px;height:18px"></i>
+            </div>
+            @if (!last) {
+              <div class="marker-line"></div>
+            }
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-content-header">
+              <span class="timeline-subtitle">{{ milestone.subtitle }}</span>
+              <span class="timeline-index">PHASE 0{{ i + 1 }}</span>
+            </div>
+            <h3 class="timeline-title">{{ milestone.title }}</h3>
+            <p class="timeline-description">{{ milestone.description }}</p>
+          </div>
+        </div>
+      }
+    </div>
+
+  </div>
+</section>

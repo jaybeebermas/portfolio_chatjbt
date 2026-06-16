@@ -1,0 +1,88 @@
+<section class="contact-page">
+  <div class="page-container">
+
+    <div class="page-header">
+      <a routerLink="/" class="back-link">
+        <i data-lucide="arrow-left" style="width:16px;height:16px"></i>
+        Back
+      </a>
+      <div>
+        <h1 class="page-title">Get In Touch</h1>
+      </div>
+    </div>
+
+    <div class="contact-grid">
+
+      <!-- Contact Info Panel -->
+      <div class="contact-info-panel">
+        <h3 class="contact-heading">Let's work together</h3>
+        <p class="contact-text">
+          Have a project in mind, an application architecture review, or just want to say hello? I'd love to hear from you. I'm always open to new ideas and collaborations.
+        </p>
+
+        <div class="contact-links">
+          <a href="mailto:bermasjaybee9@gmail.com" class="contact-link-card email-card" id="contact-mail-link">
+            <div class="contact-link-icon">
+              <i data-lucide="mail" style="width:18px;height:18px"></i>
+            </div>
+            <div class="contact-link-info">
+              <span class="contact-link-label">Email</span>
+              <span class="contact-link-value">bermasjaybee9&#64;gmail.com</span>
+            </div>
+            <i data-lucide="external-link" style="width:14px;height:14px;opacity:0.3" class="arrow-ext"></i>
+          </a>
+
+          <a href="https://www.facebook.com/jybee.bermas/" target="_blank" rel="noopener" class="contact-link-card fb-card" id="contact-fb-link">
+            <div class="contact-link-icon">
+              <i data-lucide="facebook" style="width:18px;height:18px"></i>
+            </div>
+            <div class="contact-link-info">
+              <span class="contact-link-label">Facebook</span>
+              <span class="contact-link-value">jybee.bermas</span>
+            </div>
+            <i data-lucide="external-link" style="width:14px;height:14px;opacity:0.3" class="arrow-ext"></i>
+          </a>
+
+          <a href="https://github.com/jaybeebermas" target="_blank" rel="noopener" class="contact-link-card gh-card" id="contact-gh-link">
+            <div class="contact-link-icon">
+              <i data-lucide="github" style="width:18px;height:18px"></i>
+            </div>
+            <div class="contact-link-info">
+              <span class="contact-link-label">GitHub</span>
+              <span class="contact-link-value">chatjbt</span>
+            </div>
+            <i data-lucide="external-link" style="width:14px;height:14px;opacity:0.3" class="arrow-ext"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <form class="contact-form" (submit)="onSubmit($event)" autocomplete="off">
+        <div class="form-group">
+          <label for="form-subject" class="form-label">Subject</label>
+          <div class="input-wrapper">
+            <i data-lucide="file-text" class="input-icon" style="width:16px;height:16px"></i>
+            <input type="text" id="form-subject" class="form-input" placeholder="What's this about?" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="form-message" class="form-label">Your Message</label>
+          <div class="input-wrapper textarea-wrapper">
+            <i data-lucide="message-square" class="input-icon input-icon-top" style="width:16px;height:16px"></i>
+            <textarea id="form-message" class="form-input form-textarea" placeholder="Tell me about your project or idea..." rows="6" required></textarea>
+          </div>
+        </div>
+        <button type="submit" class="submit-btn" id="form-submit">
+          @if (formSubmitted) {
+            <i data-lucide="check" style="width:16px;height:16px"></i>
+            <span>Sent!</span>
+          } @else {
+            <span>Send Message</span>
+            <i data-lucide="send" style="width:14px;height:14px" class="arrow-send"></i>
+          }
+        </button>
+      </form>
+
+    </div>
+  </div>
+</section>

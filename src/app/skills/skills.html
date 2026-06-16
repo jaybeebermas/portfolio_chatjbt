@@ -1,0 +1,28 @@
+<section class="skills-page">
+  <div class="page-container">
+
+    <div class="page-header">
+      <a routerLink="/" class="back-link">
+        <i data-lucide="arrow-left" style="width:16px;height:16px"></i>
+        Back
+      </a>
+      <div>
+        <h1 class="page-title">My Skills</h1>
+      </div>
+    </div>
+
+    <div class="skills-container">
+      <div class="skills-grid">
+        @for (skill of skills; track skill.name) {
+          <div class="skill-chip">
+            <div class="skill-chip-icon">
+              <i [attr.data-lucide]="skill.icon" style="width:18px;height:18px"></i>
+            </div>
+            <span class="skill-chip-name">{{ skill.name }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+  </div>
+</section>

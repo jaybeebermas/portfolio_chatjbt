@@ -1,0 +1,77 @@
+<!-- Premium Loading Screen -->
+@if (loading) {
+  <div class="loader">
+    <div class="loader-content">
+      <div class="loader-logo">
+        <span class="loader-bracket">&lt;</span>chatjbt<span class="loader-bracket"> /&gt;</span>
+      </div>
+      <div class="loader-bar-track">
+        <div class="loader-bar-fill"></div>
+      </div>
+      <p class="loader-text">Loading Portfolio</p>
+    </div>
+  </div>
+}
+
+<!-- App Shell -->
+<div class="app-shell" [class.is-loading]="loading">
+  <!-- Top Navbar -->
+  <header class="navbar">
+    <div class="navbar-inner">
+      <a routerLink="/" class="navbar-logo" (click)="onRouteChange()">
+        <span class="logo-bracket">&lt;</span>chatjbt<span class="logo-bracket"> /&gt;</span>
+      </a>
+
+      <nav class="navbar-nav" [class.mobile-open]="mobileMenuOpen">
+        @for (item of navItems; track item.path) {
+          <a
+            [routerLink]="item.path"
+            routerLinkActive="nav-active"
+            [routerLinkActiveOptions]="{ exact: item.exact }"
+            class="nav-link"
+            (click)="onRouteChange()"
+          >
+            <i [attr.data-lucide]="item.icon" style="width:16px;height:16px"></i>
+            <span>{{ item.label }}</span>
+          </a>
+        }
+      </nav>
+
+      <div class="navbar-actions">
+        <button class="theme-toggle" (click)="toggleTheme()" [attr.aria-label]="isDark ? 'Switch to light mode' : 'Switch to dark mode'">
+          @if (isDark) {
+            <i data-lucide="sun" style="width:18px;height:18px"></i>
+          } @else {
+            <i data-lucide="moon" style="width:18px;height:18px"></i>
+          }
+        </button>
+        <button class="mobile-menu-btn" (click)="toggleMobileMenu()" aria-label="Toggle menu">
+          @if (mobileMenuOpen) {
+            <i data-lucide="x" style="width:20px;height:20px"></i>
+          } @else {
+            <i data-lucide="menu" style="width:20px;height:20px"></i>
+          }
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile overlay -->
+  @if (mobileMenuOpen) {
+    <div class="mobile-overlay" (click)="closeMobileMenu()"></div>
+  }
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <router-outlet />
+  </main>
+
+  <!-- Floating Mobile Theme Toggle -->
+  <button class="mobile-theme-toggle" (click)="toggleTheme()" [attr.aria-label]="isDark ? 'Switch to light mode' : 'Switch to dark mode'">
+    @if (isDark) {
+      <i data-lucide="sun" style="width:20px;height:20px"></i>
+    } @else {
+      <i data-lucide="moon" style="width:20px;height:20px"></i>
+    }
+  </button>
+</div>
