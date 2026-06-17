@@ -42,6 +42,12 @@ export class ExperienceComponent implements AfterViewInit {
       icon: 'layers'
     },
     {
+      title: 'Process & Workflow Automation',
+      subtitle: 'Specialization Phase',
+      description: 'Built robust robotic process automation (RPA) workflows and SMTP notification systems to handle business logic and admin operations.',
+      icon: 'cpu'
+    },
+    {
       title: 'Building Real Projects',
       subtitle: 'Shipping Solutions',
       description: 'Applied skills to real-world systems like BrgyConnect, FitCore GymHub, LearnSphere, LibriTrack, and custom RPA/event automation workflows that solve actual problems.',

@@ -462,3 +462,93 @@
     gap: 0.75rem;
   }
 }
+
+/* ========================================
+   MY SKILLS SECTION
+   ======================================== */
+
+.about-skills-section {
+  margin-top: 2rem;
+}
+
+.about-skills-section .section-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.85rem;
+}
+
+.skills-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-card);
+  transition: all var(--transition-base);
+}
+
+.skills-container:hover {
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--border-hover);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 0.625rem;
+}
+
+.skill-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.75rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+  cursor: default;
+}
+
+.skill-chip:hover {
+  border-color: var(--accent-highlight);
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.skill-chip-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+
+.skill-chip:hover .skill-chip-icon {
+  color: var(--accent-highlight);
+  border-color: var(--accent-highlight);
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.15);
+}
+
+.skill-chip-name {
+  font-size: 0.775rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+@media (max-width: 640px) {
+  .skills-grid {
+    grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
+  }
+}
+

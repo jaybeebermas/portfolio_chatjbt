@@ -124,7 +124,7 @@
               <i data-lucide="layers" style="width:18px;height:18px"></i>
             </div>
             <h3 class="panel-title">Core Competencies</h3>
-            <a routerLink="/skills" class="panel-header-link">View All</a>
+            <a routerLink="/about" fragment="skills" class="panel-header-link">View All</a>
           </div>
 
           <div class="metrics-list">
@@ -180,27 +180,44 @@
 
           <!-- TAB CONTENT: Mock Terminal Console -->
           @if (activeTerminalTab === 'terminal') {
-          <div class="terminal-body">
+          <div class="terminal-body" (click)="cmdInput.focus()">
             <div class="terminal-body-scroll">
               @for (line of terminalLines; track $index) {
-              <div class="terminal-line">{{ line }}</div>
+                <div class="terminal-line line-{{ line.type || 'output' }}">
+                  @if (line.type === 'input') {
+                    <span class="prompt-text">guest@chatjbt:~$</span> <span class="input-command">{{ line.text }}</span>
+                  } @else if (line.type === 'skill') {
+                    @if (getParsedSkill(line.text); as skill) {
+                      <span class="skill-name">{{ skill.name }}</span>
+                      <span class="skill-bar-container">
+                        <span class="skill-bar-filled">{{ skill.filled }}</span><span class="skill-bar-empty">{{ skill.empty }}</span>
+                      </span>
+                      <span class="skill-percentage">{{ skill.percent }}</span>
+                      <span class="skill-level">{{ skill.level }}</span>
+                    } @else {
+                      <span class="line-content">{{ line.text }}</span>
+                    }
+                  } @else {
+                    <span class="line-content">{{ line.text }}</span>
+                  }
+                </div>
               }
               <div class="terminal-prompt-line">
                 <span class="prompt-text">guest@chatjbt:~$</span>
                 <input #cmdInput type="text" class="terminal-input-field" placeholder="type 'help'..."
-                  (keyup.enter)="onTerminalInput(cmdInput)" autofocus />
+                  (keyup.enter)="onTerminalInput(cmdInput)" (keydown)="onTerminalKeyDown($event, cmdInput)" autofocus />
               </div>
             </div>
 
             <!-- Quick Commands Bar -->
-            <div class="terminal-actions">
+            <div class="terminal-actions" (click)="$event.stopPropagation()">
               <span class="action-label">Quick Execute:</span>
               <div class="action-buttons">
-                <button (click)="executeTerminalCommand('help')" class="cmd-btn">help</button>
-                <button (click)="executeTerminalCommand('about')" class="cmd-btn">about</button>
-                <button (click)="executeTerminalCommand('skills')" class="cmd-btn">skills</button>
-                <button (click)="executeTerminalCommand('projects')" class="cmd-btn">projects</button>
-                <button (click)="executeTerminalCommand('clear')" class="cmd-btn">clear</button>
+                <button (click)="executeTerminalCommand('help'); cmdInput.focus()" class="cmd-btn">help</button>
+                <button (click)="executeTerminalCommand('about'); cmdInput.focus()" class="cmd-btn">about</button>
+                <button (click)="executeTerminalCommand('skills'); cmdInput.focus()" class="cmd-btn">skills</button>
+                <button (click)="executeTerminalCommand('projects'); cmdInput.focus()" class="cmd-btn">projects</button>
+                <button (click)="executeTerminalCommand('clear'); cmdInput.focus()" class="cmd-btn">clear</button>
               </div>
             </div>
           </div>
@@ -323,6 +340,20 @@
                   PostgreSQL.</p>
               </div>
             </div>
+
+            <div class="timeline-point">
+              <div class="point-marker">
+                <i data-lucide="cpu" style="width:12px;height:12px"></i>
+              </div>
+              <div class="point-content">
+                <div class="point-header">
+                  <span class="point-title">Process &amp; Workflow Automation</span>
+                  <span class="point-time">Specialization Phase</span>
+                </div>
+                <p class="point-desc">Designed robotic process automation (RPA) workflows and SMTP notification systems to handle business logic.</p>
+              </div>
+            </div>
+
 
             <div class="timeline-point">
               <div class="point-marker">

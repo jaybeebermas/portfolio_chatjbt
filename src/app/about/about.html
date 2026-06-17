@@ -145,5 +145,27 @@
       </div>
 
     </div>
+
+    <!-- My Skills Section -->
+    <div class="about-skills-section" id="skills">
+      <h3 class="section-title">My Skills</h3>
+      <div class="skills-container">
+        <div class="skills-grid">
+          @for (skill of skills; track skill.name) {
+            <div class="skill-chip">
+              <div class="skill-chip-icon">
+                @if (skill.image) {
+                  <img [src]="skill.image" [alt]="skill.name" class="tech-logo-img">
+                } @else {
+                  <i [attr.data-lucide]="skill.icon" style="width:18px;height:18px"></i>
+                }
+              </div>
+              <span class="skill-chip-name">{{ skill.name }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>

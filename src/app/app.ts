@@ -17,7 +17,6 @@ export class App implements OnInit, AfterViewInit {
   navItems = [
     { label: 'Dashboard', path: '/', icon: 'layout-dashboard', exact: true },
     { label: 'About', path: '/about', icon: 'user', exact: false },
-    { label: 'Skills', path: '/skills', icon: 'layers', exact: false },
     { label: 'Projects', path: '/projects', icon: 'folder-open', exact: false },
     { label: 'Experience', path: '/experience', icon: 'briefcase', exact: false },
     { label: 'Contact', path: '/contact', icon: 'send', exact: false },

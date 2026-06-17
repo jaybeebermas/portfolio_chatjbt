@@ -75,13 +75,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   // Terminal variables
   activeTerminalTab = 'terminal';
-  terminalLines: string[] = [
-    'System initialization successful.',
-    'Terminal v1.4.2 connected to portfolio service.',
-    'Type commands or use quick access buttons below to test terminal endpoints.',
-    'Try typing: help, about, skills, projects, clear'
-  ];
+  terminalLines: { text: string; type?: string }[] = [];
   terminalCommandHistory: string[] = [];
+  historyIndex = -1;
 
   ngOnInit() {
   }
@@ -134,70 +130,140 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     
     this.executeTerminalCommand(command);
     cmdInput.value = '';
+    this.historyIndex = -1;
+  }
+
+  onTerminalKeyDown(event: KeyboardEvent, cmdInput: HTMLInputElement) {
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      this.handleTabCompletion(cmdInput);
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      this.navigateHistory(cmdInput, -1);
+    } else if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      this.navigateHistory(cmdInput, 1);
+    }
+  }
+
+  private handleTabCompletion(cmdInput: HTMLInputElement) {
+    const currentVal = cmdInput.value.trim().toLowerCase();
+    if (!currentVal) return;
+    
+    const commands = ['help', 'about', 'skills', 'projects', 'sysinfo', 'clear'];
+    const matches = commands.filter(c => c.startsWith(currentVal));
+    
+    if (matches.length === 1) {
+      cmdInput.value = matches[0];
+    } else if (matches.length > 1) {
+      this.terminalLines.push({ text: currentVal, type: 'input' });
+      this.terminalLines.push({ text: `Candidates: ${matches.join(', ')}`, type: 'info' });
+      this.scrollTerminalToBottom();
+    }
+  }
+
+  private navigateHistory(cmdInput: HTMLInputElement, direction: number) {
+    if (this.terminalCommandHistory.length === 0) return;
+    
+    if (this.historyIndex === -1) {
+      if (direction === -1) {
+        this.historyIndex = this.terminalCommandHistory.length - 1;
+      } else {
+        return;
+      }
+    } else {
+      const newIndex = this.historyIndex + direction;
+      if (newIndex >= 0 && newIndex < this.terminalCommandHistory.length) {
+        this.historyIndex = newIndex;
+      } else if (newIndex >= this.terminalCommandHistory.length) {
+        this.historyIndex = -1;
+        cmdInput.value = '';
+        return;
+      } else {
+        return;
+      }
+    }
+    
+    cmdInput.value = this.terminalCommandHistory[this.historyIndex];
+    setTimeout(() => {
+      cmdInput.selectionStart = cmdInput.selectionEnd = cmdInput.value.length;
+    }, 0);
   }
 
   executeTerminalCommand(command: string) {
-    this.terminalLines.push(`guest@chatjbt:~$ ${command}`);
+    this.terminalLines.push({ text: command, type: 'input' });
     this.terminalCommandHistory.push(command);
 
     const cmd = command.toLowerCase();
     
-    setTimeout(() => {
-      switch (cmd) {
-        case 'help':
-          this.terminalLines.push(
-            'Supported terminal actions:',
-            '  about       - Summarize Niño\'s professional focus',
-            '  skills      - Print language and tool mastery rates',
-            '  projects    - Output featured systems and links',
-            '  sysinfo     - Display platform build environment diagnostics',
-            '  clear       - Wipe output log history'
-          );
-          break;
-        case 'about':
-          this.terminalLines.push(
-            'Niño Jaybee R. Bermas — Full Stack Developer',
-            'Specialization: Full-stack applications, API integration, and automation systems.',
-            'Philosophy: Building maintainable, fast, user-oriented apps.',
-            'Location: Philippines'
-          );
-          break;
-        case 'skills':
-          this.terminalLines.push(
-            'Technical Proficiency Metrics:',
-            '  Backend Dev  [██████████████████░░] 90% (Advanced)',
-            '  Frontend Dev [████████████████░░░░] 80% (Advanced)',
-            '  Scripting    [█████████████████░░░] 85% (Advanced)',
-            '  Databases    [█████████████████░░░] 85% (Advanced)',
-            '  Git Flow     [████████████████░░░░] 80% (Intermediate)'
-          );
-          break;
-        case 'projects':
-          this.terminalLines.push(
-            'Current Production Systems:',
-            '  • Faculty RPA  - Faculty Workload Schedule automation (Python/RPA)',
-            '  • Interlink    - Event registration & certificate automation (Node.js/SMTP)',
-            '  • BrgyConnect  - Barangay digitizer portal (PHP/MySQL)',
-            '  • FitCore Gym  - Membership workflows (TS/PHP/Postgres)'
-          );
-          break;
-        case 'sysinfo':
-          this.terminalLines.push(
-            'HOST: chatjbt-portfolio-v1.4',
-            'OS: Linux x86_64 Angular Component Container',
-            'NODE: v20.x, ANGULAR: v21.2.0',
-            'STATUS: Online & Active',
-            'LATENCY: 42ms'
-          );
-          break;
-        case 'clear':
-          this.terminalLines = [];
-          break;
-        default:
-          this.terminalLines.push(`Command not recognized: "${command}". Type "help" to list valid instructions.`);
-      }
-      this.scrollTerminalToBottom();
-    }, 100);
+    switch (cmd) {
+      case 'help':
+        this.terminalLines.push(
+          { text: 'Supported terminal actions:', type: 'header' },
+          { text: '  about       - Summarize Niño\'s professional focus', type: 'output' },
+          { text: '  skills      - Print language and tool mastery rates', type: 'output' },
+          { text: '  projects    - Output featured systems and links', type: 'output' },
+          { text: '  sysinfo     - Display platform build environment diagnostics', type: 'output' },
+          { text: '  clear       - Wipe output log history', type: 'output' }
+        );
+        break;
+      case 'about':
+        this.terminalLines.push(
+          { text: 'Niño Jaybee R. Bermas — Full Stack Developer', type: 'header' },
+          { text: 'Specialization: Full-stack applications, API integration, and automation systems.', type: 'output' },
+          { text: 'Philosophy: Building maintainable, fast, user-oriented apps.', type: 'output' },
+          { text: 'Location: Philippines', type: 'output' }
+        );
+        break;
+      case 'skills':
+        this.terminalLines.push(
+          { text: 'Technical Proficiency Metrics:', type: 'header' },
+          { text: '  Backend Dev  [██████████████████░░] 90% (Advanced)', type: 'skill' },
+          { text: '  Frontend Dev [████████████████░░░░] 80% (Advanced)', type: 'skill' },
+          { text: '  Scripting    [█████████████████░░░] 85% (Advanced)', type: 'skill' },
+          { text: '  Databases    [█████████████████░░░] 85% (Advanced)', type: 'skill' },
+          { text: '  Git Flow     [████████████████░░░░] 80% (Intermediate)', type: 'skill' }
+        );
+        break;
+      case 'projects':
+        this.terminalLines.push(
+          { text: 'Current Production Systems:', type: 'header' },
+          { text: '  • Faculty RPA  - Faculty Workload Schedule automation (Python/RPA)', type: 'output' },
+          { text: '  • Interlink    - Event registration & certificate automation (Node.js/SMTP)', type: 'output' },
+          { text: '  • BrgyConnect  - Barangay digitizer portal (PHP/MySQL)', type: 'output' },
+          { text: '  • FitCore Gym  - Membership workflows (TS/PHP/Postgres)', type: 'output' }
+        );
+        break;
+      case 'sysinfo':
+        this.terminalLines.push(
+          { text: 'SYSTEM DIAGNOSTICS:', type: 'header' },
+          { text: '  HOST: chatjbt-portfolio-v1.4', type: 'output' },
+          { text: '  OS: Linux x86_64 Angular Component Container', type: 'output' },
+          { text: '  NODE: v20.x, ANGULAR: v21.2.0', type: 'output' },
+          { text: '  STATUS: Online & Active', type: 'success' },
+          { text: '  LATENCY: 42ms', type: 'output' }
+        );
+        break;
+      case 'clear':
+        this.terminalLines = [];
+        break;
+      default:
+        this.terminalLines.push({ text: `Command not recognized: "${command}". Type "help" to list valid instructions.`, type: 'error' });
+    }
+    this.scrollTerminalToBottom();
+  }
+
+  getParsedSkill(text: string) {
+    const regex = /^\s*([A-Za-z0-9\s#+\.\-]+?)\s+\[([█]+)([░]*)\]\s*(\d+%)\s*(\(.+?\))/;
+    const match = text.match(regex);
+    if (!match) return null;
+    return {
+      name: match[1].trim(),
+      filled: match[2],
+      empty: match[3],
+      percent: match[4],
+      level: match[5]
+    };
   }
 
   dashboardContactSubmitted = false;
