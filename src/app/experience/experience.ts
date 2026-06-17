@@ -32,19 +32,19 @@ export class ExperienceComponent implements AfterViewInit {
     {
       title: 'Backend & Databases',
       subtitle: 'Server-Side Mastery',
-      description: 'Picked up Laravel as the primary backend framework. Gained proficiency in MySQL and PostgreSQL for designing efficient, scalable database architectures.',
+      description: 'Mastered backend systems, API integration, and server-side logic. Gained proficiency in MySQL and PostgreSQL for designing efficient, scalable database architectures.',
       icon: 'database'
     },
     {
-      title: 'Full Stack with Angular',
+      title: 'Full Stack Development',
       subtitle: 'Leveling Up',
-      description: 'Embraced Angular for building complex, component-driven single-page applications. Combined frontend and backend expertise to deliver end-to-end solutions.',
+      description: 'Built complex, component-driven single-page applications. Combined frontend and backend expertise to deliver end-to-end solutions.',
       icon: 'layers'
     },
     {
       title: 'Building Real Projects',
       subtitle: 'Shipping Solutions',
-      description: 'Applied skills to real-world projects like BrgyConnect, FitCore GymHub, LearnSphere, and LibriTrack — systems that solve actual problems for real users.',
+      description: 'Applied skills to real-world systems like BrgyConnect, FitCore GymHub, LearnSphere, LibriTrack, and custom RPA/event automation workflows that solve actual problems.',
       icon: 'rocket'
     },
     {

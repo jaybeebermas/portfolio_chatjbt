@@ -23,52 +23,52 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   // Expanded project list
   featuredProjects = [
+    {
+      name: 'Faculty Schedule RPA',
+      category: 'Process Automation',
+      tags: ['Python', 'RPA', 'Automation'],
+      desc: 'Automates the generation and distribution of faculty workload schedules, minimizing administrative overhead.',
+      link: '/projects'
+    },
+    {
+      name: 'Interlink Event Automation',
+      category: 'Workflow Automation',
+      tags: ['Node.js', 'SMTP', 'PDF Gen'],
+      desc: 'Manages event registration, generates invitation letters and certificates, and emails them automatically.',
+      link: '/projects'
+    },
     { 
       name: 'BrgyConnect', 
       category: 'Barangay Management', 
-      tags: ['Laravel', 'MySQL', 'JavaScript'],
+      tags: ['PHP', 'MySQL', 'JavaScript'],
       desc: 'Digital platform streamlining public records, request workflows, and community announcements.',
       link: '/projects'
     },
     { 
       name: 'FitCore GymHub', 
       category: 'Gym Management', 
-      tags: ['Angular', 'Laravel', 'PostgreSQL'],
+      tags: ['TypeScript', 'PHP', 'PostgreSQL'],
       desc: 'Modern gym solution for member schedules, tracking, attendance, and trainer sessions.',
-      link: '/projects'
-    },
-    { 
-      name: 'LearnSphere', 
-      category: 'Learning Management', 
-      tags: ['Laravel', 'JavaScript', 'MySQL'],
-      desc: 'An interactive portal allowing courses, assignments, quizzes, and progression metrics.',
-      link: '/projects'
-    },
-    { 
-      name: 'LibriTrack', 
-      category: 'Library Management', 
-      tags: ['Angular', 'PostgreSQL', 'JavaScript'],
-      desc: 'A digital checkout system tracking book borrowing, return scheduling, and analytics.',
       link: '/projects'
     }
   ];
 
   // Core metrics for the Tech Stack panel
   coreSkills = [
-    { name: 'Laravel (Backend)', percentage: 90, level: 'Advanced', image: '/Laravel.svg' },
-    { name: 'Angular (Frontend)', percentage: 80, level: 'Advanced', image: '/angular_icon_gradient.gif' },
-    { name: 'JavaScript (Frontend)', percentage: 85, level: 'Advanced', image: '/js.png' },
-    { name: 'Databases (MySQL & Postgres)', percentage: 75, level: 'Intermediate', image: '/mysql.png' },
-    { name: 'C++ (Problem Solving)', percentage: 70, level: 'Intermediate', image: '/c-.png' },
-    { name: 'Git & VCS Workflow', percentage: 85, level: 'Advanced', image: '/git.png' }
+    { name: 'Laravel', percentage: 90, level: 'Advanced', image: '/Laravel.svg' },
+    { name: 'Angular', percentage: 85, level: 'Advanced', image: '/angular_icon_gradient.gif' },
+    { name: 'JavaScript', percentage: 85, level: 'Advanced', image: '/js.png' },
+    { name: 'MySQL', percentage: 85, level: 'Advanced', image: '/mysql.png' },
+    { name: 'C++', percentage: 75, level: 'Intermediate', image: '/c-.png' },
+    { name: 'Git', percentage: 80, level: 'Intermediate', image: '/git.png' }
   ];
 
   // Skills overview fallback (retains names for general lists)
   skills = [
-    { name: 'Laravel', category: 'Backend' },
-    { name: 'Angular', category: 'Frontend' },
-    { name: 'MySQL', category: 'Database' },
-    { name: 'JavaScript', category: 'Frontend' },
+    { name: 'Backend Dev', category: 'Backend' },
+    { name: 'Frontend Dev', category: 'Frontend' },
+    { name: 'Databases', category: 'Database' },
+    { name: 'Automation', category: 'RPA' },
   ];
 
 
@@ -157,7 +157,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         case 'about':
           this.terminalLines.push(
             'Niño Jaybee R. Bermas — Full Stack Developer',
-            'Specialization: Angular core frontend architecture, Laravel backends.',
+            'Specialization: Full-stack applications, API integration, and automation systems.',
             'Philosophy: Building maintainable, fast, user-oriented apps.',
             'Location: Philippines'
           );
@@ -165,20 +165,20 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         case 'skills':
           this.terminalLines.push(
             'Technical Proficiency Metrics:',
-            '  Laravel      [██████████████████░░] 90% (Advanced)',
-            '  Angular      [████████████████░░░░] 80% (Advanced)',
-            '  JavaScript   [█████████████████░░░] 85% (Advanced)',
-            '  Databases    [██████████████░░░░░░] 75% (Intermediate)',
-            '  Git Flow     [████████████████░░░░] 80% (Advanced)'
+            '  Backend Dev  [██████████████████░░] 90% (Advanced)',
+            '  Frontend Dev [████████████████░░░░] 80% (Advanced)',
+            '  Scripting    [█████████████████░░░] 85% (Advanced)',
+            '  Databases    [█████████████████░░░] 85% (Advanced)',
+            '  Git Flow     [████████████████░░░░] 80% (Intermediate)'
           );
           break;
         case 'projects':
           this.terminalLines.push(
             'Current Production Systems:',
-            '  • BrgyConnect  - Barangay digitizer portal (Laravel/MySQL)',
-            '  • FitCore Gym  - Membership workflows (Angular/Laravel/Postgres)',
-            '  • LearnSphere  - E-Learning courseware hub (Laravel/MySQL)',
-            '  • LibriTrack   - School library logs (Angular/Postgres)'
+            '  • Faculty RPA  - Faculty Workload Schedule automation (Python/RPA)',
+            '  • Interlink    - Event registration & certificate automation (Node.js/SMTP)',
+            '  • BrgyConnect  - Barangay digitizer portal (PHP/MySQL)',
+            '  • FitCore Gym  - Membership workflows (TS/PHP/Postgres)'
           );
           break;
         case 'sysinfo':
